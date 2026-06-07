@@ -3,6 +3,7 @@ import { Card, CardHead }     from '../components/shared/Card'
 import { EntryRow }           from '../components/shared/EntryRow'
 import { ProgressBar }        from '../components/shared/ProgressBar'
 import { PortfolioBreakdown } from '../components/home/PortfolioBreakdown'
+import { PortfolioHistory }   from '../components/home/PortfolioHistory'
 import { computeMetrics }     from '../utils/metrics'
 import {
   fmtBtc, fmtUsdCompact, fmtThbCompact,
@@ -201,6 +202,13 @@ export function HomePage({ state, onEditGoal, onRefresh }) {
         dipBtc={m.dipBtc}
         price={m.price}
         usdthb={m.usdthb}
+      />
+
+      {/* ── PORTFOLIO HISTORY ────────────────────── */}
+      <PortfolioHistory
+        dca={state.dca}
+        dip={state.dip}
+        currentPrice={m.price}
       />
 
       {/* ── THIS MONTH ───────────────────────────── */}
