@@ -39,7 +39,7 @@ function buildHistory(dca, dip) {
     cumCost += x.usdtAmount
     const avgCost  = cumBtc > 0 ? cumCost / cumBtc : 0
     const d        = new Date(x.date)
-    const label    = d.toLocaleDateString('en-US', { month: 'short', year: '2-digit' })
+    const label    = d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: '2-digit' })
     return {
       label,
       avgCost:  Math.round(avgCost),
