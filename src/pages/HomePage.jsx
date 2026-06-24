@@ -130,7 +130,7 @@ export function HomePage({ state, onEditGoal, onRefresh }) {
 
         {/* Invested cost (recorded — does NOT change with price) */}
         <p className="font-mono text-[13px] mb-0.5" style={{ color: 'var(--muted)' }}>
-          Invested {fmtUsdCompact(m.totalInv)}&nbsp;·&nbsp;{fmtThbCompact(m.totalInv * m.usdthb)}
+          Invested {fmtUsdCompact(m.totalInv)}&nbsp;·&nbsp;{fmtThbCompact(m.totalInvThb)}
         </p>
         {/* Current market value (live) */}
         <p className="font-mono text-[11px] mb-4" style={{ color: 'var(--muted)', opacity: 0.65 }}>
