@@ -247,6 +247,7 @@ export function AddEntrySheet({ open, onClose, onSave, settings }) {
         date: form.date || today, type: 'BUY',
         source: form.source || 'Manual',
         btcQty: +form.btcQty || 0, usdtAmount: +form.usdtAmount || 0,
+        thbAmount: +form.thbAmount || 0,
         price: +form.price || 0, note: form.note || '',
         location: form.location || 'Wallet',
         strategy: mode === 'Dip' ? 'Dip Reserve' : 'DCA',
@@ -334,6 +335,12 @@ export function AddEntrySheet({ open, onClose, onSave, settings }) {
                 value={form.usdtAmount} onChange={handleUsd}
                 placeholder="325.00" step="0.01" unit="USD"
                 helper={fmtThb(form.usdtAmount)}
+              />
+              <InputWithUnit
+                label="THB Amount (actual)" type="number"
+                value={form.thbAmount} onChange={v => set('thbAmount', v)}
+                placeholder="e.g. 10500" step="1" unit="THB"
+                helper="Optional — actual THB paid at time of purchase"
               />
               <div className="grid grid-cols-2 gap-2.5">
                 <InputWithUnit label="Exchange" type="text" value={form.source}   onChange={v => set('source', v)}   placeholder="Bitkub" />
