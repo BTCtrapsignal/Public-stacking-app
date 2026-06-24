@@ -79,6 +79,7 @@ export function sanitizeDcaEntry(raw) {
     source:      safeStr(raw.source, 100, ''),
     btcQty,
     usdtAmount:  safeNum(raw.usdtAmount, 0),
+    thbAmount:   safePos(raw.thbAmount, 0),
     price:       safePos(raw.price, 0),
     note:        safeStr(raw.note, 300, ''),
     location:    safeStr(raw.location, 100, ''),

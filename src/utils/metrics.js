@@ -26,6 +26,13 @@ export function computeMetrics({ dca, dip, futures, grid, settings }) {
   const dipInv  = safeDip.reduce((s, x) => s + (x.btcQty > 0 ? Math.abs(+x.usdtAmount || 0) : 0), 0)
   const totalInv = dcaInv + dipInv
 
+  // Actual THB invested — use thbAmount if recorded, else fallback to usdtAmount × live rate
+  const dcaInvThb  = safeDca.reduce((s, x) => s + (x.btcQty > 0
+    ? (x.thbAmount > 0 ? x.thbAmount : Math.abs(+x.usdtAmount || 0) * usdthb) : 0), 0)
+  const dipInvThb  = safeDip.reduce((s, x) => s + (x.btcQty > 0
+    ? (x.thbAmount > 0 ? x.thbAmount : Math.abs(+x.usdtAmount || 0) * usdthb) : 0), 0)
+  const totalInvThb = dcaInvThb + dipInvThb
+
   // Avg cost per BTC (cost basis / total BTC held)
   const avgCost = totalBtc > 0 ? totalInv / totalBtc : 0
 
@@ -48,7 +55,7 @@ export function computeMetrics({ dca, dip, futures, grid, settings }) {
   return {
     price, usdthb,
     dcaBtc, dipBtc, totalBtc,
-    dcaInv, dipInv, totalInv,
+    dcaInv, dipInv, totalInv, totalInvThb,
     avgCost,
     marketValue, unrealPnlUsd, unrealPnlPct,
     futPnl, gridPnl, wins, winRate,
