@@ -28,17 +28,17 @@ function download(filename, csv) {
 }
 
 export function exportDcaCsv(entries) {
-  const headers = ['Date', 'Type', 'Source', 'BTC Qty', 'USDT Amount', 'Price (USD)', 'Note', 'Location', 'Strategy']
+  const headers = ['Date', 'Type', 'Source', 'BTC Qty', 'USDT Amount', 'THB Amount', 'Price (USD)', 'Note', 'Location', 'Strategy']
   const rows = entries.map(x => [
-    x.date, x.type, x.source, x.btcQty, x.usdtAmount, x.price, x.note, x.location, x.strategy,
+    x.date, x.type, x.source, x.btcQty, x.usdtAmount, x.thbAmount || '', x.price, x.note, x.location, x.strategy,
   ])
   download('dca_entries.csv', toCsv(headers, rows))
 }
 
 export function exportDipCsv(entries) {
-  const headers = ['Date', 'Type', 'Source', 'BTC Qty', 'USDT Amount', 'Price (USD)', 'Note', 'Location', 'Strategy']
+  const headers = ['Date', 'Type', 'Source', 'BTC Qty', 'USDT Amount', 'THB Amount', 'Price (USD)', 'Note', 'Location', 'Strategy']
   const rows = entries.map(x => [
-    x.date, x.type, x.source, x.btcQty, x.usdtAmount, x.price, x.note, x.location, x.strategy,
+    x.date, x.type, x.source, x.btcQty, x.usdtAmount, x.thbAmount || '', x.price, x.note, x.location, x.strategy,
   ])
   download('dip_reserve.csv', toCsv(headers, rows))
 }
@@ -67,9 +67,9 @@ export function exportAllCsv(state) {
   // All sheets combined into one file with section headers
   const now = new Date().toISOString().slice(0, 10)
 
-  const dcaHeaders = ['Sheet', 'Date', 'Type', 'Source', 'BTC Qty', 'USDT Amount', 'Price (USD)', 'Note', 'Location']
-  const dcaRows = state.dca.map(x => ['DCA', x.date, x.type, x.source, x.btcQty, x.usdtAmount, x.price, x.note, x.location])
-  const dipRows = state.dip.map(x => ['DIP', x.date, x.type, x.source, x.btcQty, x.usdtAmount, x.price, x.note, x.location])
+  const dcaHeaders = ['Sheet', 'Date', 'Type', 'Source', 'BTC Qty', 'USDT Amount', 'THB Amount', 'Price (USD)', 'Note', 'Location']
+  const dcaRows = state.dca.map(x => ['DCA', x.date, x.type, x.source, x.btcQty, x.usdtAmount, x.thbAmount || '', x.price, x.note, x.location])
+  const dipRows = state.dip.map(x => ['DIP', x.date, x.type, x.source, x.btcQty, x.usdtAmount, x.thbAmount || '', x.price, x.note, x.location])
 
   const futHeaders = ['Sheet', 'Date Close', 'Side', 'Leverage', 'Mode', 'Entry', 'Exit', 'Size BTC', 'PnL USDT', 'Mistake Tag']
   const futRows = state.futures.map(x => ['FUT', x.dateClose, x.side, x.leverage, x.mode, x.entryPrice, x.exitPrice, x.sizeBtc, x.pnlUsdt, x.mistakeTag])
