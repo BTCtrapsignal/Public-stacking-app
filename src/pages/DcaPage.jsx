@@ -18,8 +18,10 @@ const $$ = (v, d = 0) => {
 
 export function DcaPage({ state, onEditPlan, onDeleteEntry }) {
   const { settings } = state
-  const dcaBtc = useMemo(() => state.dca.reduce((s, x) => s + (+x.btcQty || 0), 0), [state.dca])
-  const proj   = useMemo(() => estimateProjection({ settings, dcaBtc }), [settings, dcaBtc])
+  const dcaBtc   = useMemo(() => state.dca.reduce((s, x) => s + (+x.btcQty || 0), 0), [state.dca])
+  const dipBtc   = useMemo(() => state.dip.reduce((s, x) => s + (+x.btcQty || 0), 0), [state.dip])
+  const totalBtc = dcaBtc + dipBtc
+  const proj     = useMemo(() => estimateProjection({ settings, dcaBtc: totalBtc }), [settings, totalBtc])
   const pct    = Math.min(100, (proj.currentBtc / proj.targetBTC) * 100)
 
   const chartPts = useMemo(() =>
